@@ -1,5 +1,14 @@
 # HappyFee
 
+## Global Values
+Set in main.js
+
+**Colors** can be accessed in every component:
+
+in template as `{{ colors }}`
+
+in script as `this.colors`
+
 ## Project setup
 ```
 npm install

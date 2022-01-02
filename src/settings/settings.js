@@ -1,5 +1,4 @@
 let colors, values;
-let val = 4;
 
 colors = {
     primary: "#002266", // 20%
@@ -30,4 +29,4 @@ colors = {
      */
 };
 
-export {colors, val};
+export {colors, values};

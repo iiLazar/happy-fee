@@ -35,6 +35,7 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
+	/* TODO change global text color */
 	color: #acae50;
 }
 
@@ -50,18 +51,32 @@ export default {
 	align-items: stretch;
 }
 
-.round-50 {
-	border-radius: 50px;
+.round-S {
+	border-radius: 15px;
 }
-.round-70 {
-	border-radius: 70px;
+
+/* Colors are set using values from settings.js => in template */
+input[type=number] {
+	width: 3.3rem;
+	height: 2rem;
+	font-size: 1rem;
+	text-align: right;
+	border: 0.1rem solid;
+	border-radius: 10px;
+	padding: 0 0.2rem 0 0.3rem;
+}
+
+input.monthly-fee {
+	width: 5rem;
 }
 
 .backgroundContainer {
 	width: 100vw;
 	height: 100vh;
+	padding-bottom: 0.5rem;
 }
 
+/* TODO remove */
 #nav {
 	padding: 30px;
 }

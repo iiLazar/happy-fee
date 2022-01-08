@@ -1,17 +1,29 @@
 <template>
-	<div :style="mainContainerStyle" class="mainContainer horizCont round-70">
-		<div :style="{backgroundColor: colors.primary}" class="leftC round-50">
-
-		</div>
-		<div :style="{backgroundColor: colors.primary}" class="rightC round-50">
+	<div :style="mainContainerStyle" class="mainContainer horizCont round-S">
+		<div :style="{backgroundColor: colors.primary}" class="leftC vertCont round-S">
 			<input
 				type="number"
 				v-model="eurPHInput"
+				class="hourly-fee"
 				:min=sliderMin
 				:max=sliderMax
 				:step=sliderStep
 				@change="updateEurPHSlide"
+				:style="{backgroundColor: colors.greyLight, color: colors.secondary, borderColor: colors.secondary}"
 			/>
+
+			<input
+				type="number"
+				v-model="rsdPM"
+				class="monthly-fee"
+				:min=monthlyMin
+				:max=monthlyMax
+				:step=monthlyStep
+				@change="updateEurPHSlide"
+				:style="{backgroundColor: colors.greyLight, color: colors.secondary, borderColor: colors.secondary}"
+			/>
+		</div>
+		<div :style="{backgroundColor: colors.primary}" class="rightC horizCont round-S">
 			<br>
 			<VueSlider
 				v-model="eurPHSlide"
@@ -53,6 +65,8 @@ export default {
 			sliderHeight: 20,
 			sliderTrackColor: this.colors.secondary,
 
+			monthlyStep: 10,
+
 			mainContainerStyle: {
 				backgroundColor: this.colors.secondary,
 			},
@@ -67,6 +81,15 @@ export default {
 		}
 	},
 	computed: {
+		rsdPM: function() {
+			return Math.ceil(this.eurPHInput * 118 * 6 * 23);
+		},
+		monthlyMin: function() {
+			return Math.ceil(this.sliderMin * 118);
+		},
+		monthlyMax: function() {
+			return Math.ceil(this.sliderMax * 118);
+		},
 		sliderColor: function() {
 			if (this.eurPHInput < 4) {
 				return "#e60000"; // red

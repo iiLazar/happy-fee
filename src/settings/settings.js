@@ -3,6 +3,7 @@ let colors, values;
 colors = {
     primary: "#002266", // 20%
     secondary: "#002b80", // 25%
+    greyLight: "#eeeeee",
 
     /* 
         100% 		 #ffffff

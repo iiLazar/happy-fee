@@ -1,8 +1,10 @@
 let colors, values;
 
 colors = {
-    primary: "#002266", // 20%
-    secondary: "#002b80", // 25%
+    primary: "#002266",     // 20%
+    secondary: "#002b80",   // 25%
+    tertiary: "#003cb3",    // 35%
+    medium: "#4d88ff",      // 60%
     greyLight: "#eeeeee",
 
     /* 

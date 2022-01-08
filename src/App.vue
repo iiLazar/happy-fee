@@ -20,6 +20,7 @@ export default {
 			// only styling using setting.js; rest is in <style>
 			backgroundContainerStyle: {
 				backgroundColor: this.colors.primary,
+				color: this.colors.greyLight,
 			},
 		}
 	}
@@ -43,6 +44,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 }
 
 .horizCont {
@@ -55,8 +57,9 @@ export default {
 	border-radius: 15px;
 }
 
+/* TODO remove */
 /* Colors are set using values from settings.js => in template */
-input[type=number] {
+/* input[type=number] {
 	width: 3.3rem;
 	height: 2rem;
 	font-size: 1rem;
@@ -64,11 +67,11 @@ input[type=number] {
 	border: 0.1rem solid;
 	border-radius: 10px;
 	padding: 0 0.2rem 0 0.3rem;
-}
-
+} */
+/* 
 input.monthly-fee {
 	width: 5rem;
-}
+} */
 
 .backgroundContainer {
 	width: 100vw;

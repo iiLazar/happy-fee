@@ -5,8 +5,15 @@ colors = {
     secondary: "#002b80",   // 25%
     tertiary: "#003cb3",    // 35%
     medium: "#4d88ff",      // 60%
+    light: "#80aaff",       // 75%
     greyLight: "#eeeeee",
+    inputSlider: "00e600",
 
+    // Happiness Colors
+    levelHappy: "#009900",  // green
+
+
+    // Base Blue
     /* 
         100% 		 #ffffff
         95% 		 #e6eeff

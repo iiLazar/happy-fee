@@ -2,34 +2,45 @@
 	<div :style="mainContainerStyle" class="mainContainer horizCont round-S">
 		<div :style="{backgroundColor: colors.primary}" class="leftC vertCont round-S">
 			<div class="aboveSlider horizCont">
-				<SalaryAmountDisplay title="rub/y" amount="48"/>
-				<SalaryAmountDisplay title="rub/y" amount="48"/>
+				<SalaryAmountDisplay title="RSD/h" amount="48"/>
+				<SalaryAmountDisplay title="€/h" amount="48"/>
+			</div>
+			<div class="inputSliderCont">
+				Use slider to
+				<br> set fee value:
+				<VueSlider class="inputSlider"
+					v-model="happySlideValue"
+					:color=colors.levelHappy
+					:trackColor=colors.tertiary
+					:min=happySliderMin
+					:max=happySliderMax
+					:step=happySliderStep
+					:height=inputSliderHeight
+				/>
+
 			</div>
 			<div class="belowSlider horizCont">
-				<SalaryAmountDisplay title="rub/y" amount="48"/>
-				<SalaryAmountDisplay title="rub/y" amount="48"/>
+				<SalaryAmountDisplay title="RSD/Month" amount="48"/>
+				<SalaryAmountDisplay title="€/Month" amount="48"/>
 			</div>
 		</div>
 		<div :style="{backgroundColor: colors.primary}" class="rightC horizCont round-S">
 			<div id="happySliderContainer">
 				<VueSlider
-					v-model="happySlide"
+					v-model="happySlideValue"
 					:color=happySliderColor
-					:trackColor=happySliderTrackColor
+					:trackColor=colors.secondary
 					:min=happySliderMin
 					:max=happySliderMax
 					:step=happySliderStep
 					:width=happySliderWidth
 					:height=happySliderHeight
 					orientation="vertical"
-					@change="updateEurPHInput"
 				/>
 			</div>
 
 			<div id="happyDescriptionContainer">
-				slide {{ happySlide }}
-				<br>
-				input {{ eurPHInput }}
+				slide {{ happySlideValue }}
 			</div>
 		</div>
 	</div>
@@ -48,15 +59,14 @@ export default {
 	},
 	data() {
 		return {
-			eurPHInput: 4,
-			happySlide: 4,
+			happySlideValue: 4,
 			// Need these slider values to be numbers to avoid type warnings (expected nubmer 2 got string "2")
 			happySliderMin: 2,
 			happySliderMax: 12,
 			happySliderStep: 0.1,
 			happySliderWidth: "100%",
-			happySliderHeight: 60,
-			happySliderTrackColor: this.colors.secondary,
+			happySliderHeight: 70,
+			inputSliderHeight: 20,
 
 			mainContainerStyle: {
 				backgroundColor: this.colors.secondary,
@@ -64,9 +74,9 @@ export default {
 		}
 	},
 	methods: {
-		updateHappySlide() {
-			this.happySlide = this.eurPHInput;
-		},
+		// updateHappySlideValue() {
+		// 	this.happySlideValue = this.eurPHInput;
+		// },
 	},
 
 	// TODO remove or use
@@ -81,14 +91,14 @@ export default {
 		// 	return Math.ceil(this.sliderMax * 118);
 		// },
 		happySliderColor: function() {
-			if (this.happySlide < 4) {
+			if (this.happySlideValue < 4) {
 				return "#e60000"; // red
-			} else if (this.happySlide < 5) {
+			} else if (this.happySlideValue < 5) {
 				return "#e68a00"; // amber
-			} else if (this.happySlide < 7) {
+			} else if (this.happySlideValue < 7) {
 				return "#ffe100"; // yellow
-			} else if (this.happySlide < 10) {
-				return "#009900"; // green
+			} else if (this.happySlideValue < 10) {
+				return this.colors.levelHappy; // green
 			} else {
 				return "#0099ff" // blue
 			}
@@ -114,9 +124,20 @@ export default {
 	height: 100%;
 }
 
-.aboveSlider, .belowSlider {
+.aboveSlider, .belowSlider, .inputSliderCont {
 	width: 100%;
 	padding: 1vh 2vw;
+}
+
+.inputSliderCont {
+	font-size: 1.7rem;
+	text-align: left;
+	padding-top: 4rem;
+	padding-bottom: 4rem;
+}
+
+.inputSlider {
+	margin-top: 0.8rem;
 }
 
 #happySliderContainer {

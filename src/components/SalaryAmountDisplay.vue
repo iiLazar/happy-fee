@@ -13,7 +13,6 @@ export default {
     name: "SalaryAmountDisplay",
     props: {
         title: String,
-        // TODO type
         amount: String,
     }
 }

@@ -1,6 +1,20 @@
-let colors, values;
+let values = {
+    rsdPEur: 117.61,   // 2022 01 21
+    /*  average work hours per month
+        2022 average 173.33 https://www.paragraf.rs/statistika/minimalna_zarada.html
+        bckp 174 2021 https://www.chr.ucla.edu/news/monthly-working-hours-calendar
+     */
+    workHoursPMonth: 173,
+    workHPercent: 0.75,
+    // happyness levels
+    tresholdSad: 4,         // very Sad < 4
+    tresholdOkay: 5,        // sad 4 - 5
+    tresholdVeryHappy: 6,   // okay 5 - 6 (Milan 1y infl 1.25 adjusted: 4.93 - 5.34)
+    tresholdExtatic: 8,     // happy 6 - 8
+                            // extatic > 8
+};
 
-colors = {
+let colors = {
     primary: "#002266",     // 20%
     secondary: "#002b80",   // 25%
     tertiary: "#003cb3",    // 35%
@@ -10,7 +24,11 @@ colors = {
     inputSlider: "00e600",
 
     // Happiness Colors
-    levelHappy: "#009900",  // green
+    levelVerySad: "#e60000",    // red
+    levelSad: "#e68a00",        // amber
+    levelOkay: "#ffe100",       // yellow
+    levelVeryHappy: "#009900",  // green
+    levelExtatic: "#0099ff",    // blue
 
 
     // Base Blue

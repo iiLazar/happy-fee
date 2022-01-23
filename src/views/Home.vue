@@ -2,15 +2,15 @@
 	<div :style="mainContainerStyle" class="mainContainer horizCont round-S">
 		<div :style="{backgroundColor: colors.primary}" class="leftC vertCont round-S">
 			<div class="aboveSlider horizCont">
-				<SalaryAmountDisplay title="RSD/h" amount="48"/>
-				<SalaryAmountDisplay title="€/h" amount="48"/>
+				<SalaryAmountDisplay title="RSD/Month" :amount=rsdPM />
+				<SalaryAmountDisplay title="€/Month" :amount=eurPM />
 			</div>
 			<div class="inputSliderCont">
 				Use slider to
 				<br> set fee value:
 				<VueSlider class="inputSlider"
 					v-model="happySlideValue"
-					:color=colors.levelHappy
+					:color=colors.levelVeryHappy
 					:trackColor=colors.tertiary
 					:min=happySliderMin
 					:max=happySliderMax
@@ -20,8 +20,8 @@
 
 			</div>
 			<div class="belowSlider horizCont">
-				<SalaryAmountDisplay title="RSD/Month" amount="48"/>
-				<SalaryAmountDisplay title="€/Month" amount="48"/>
+				<SalaryAmountDisplay title="RSD/h" :amount=rsdPh />
+				<SalaryAmountDisplay title="€/h" :amount=eurPh />
 			</div>
 		</div>
 		<div :style="{backgroundColor: colors.primary}" class="rightC horizCont round-S">
@@ -59,11 +59,11 @@ export default {
 	},
 	data() {
 		return {
-			happySlideValue: 4,
+			happySlideValue: this.values.tresholdOkay,
 			// Need these slider values to be numbers to avoid type warnings (expected nubmer 2 got string "2")
-			happySliderMin: 2,
-			happySliderMax: 12,
-			happySliderStep: 0.1,
+			happySliderMin: 2.90,
+			happySliderMax: 9.99,
+			happySliderStep: 0.01,
 			happySliderWidth: "100%",
 			happySliderHeight: 70,
 			inputSliderHeight: 20,
@@ -79,28 +79,30 @@ export default {
 		// },
 	},
 
-	// TODO remove or use
 	computed: {
-		// rsdPM: function() {
-		// 	return Math.ceil(this.eurPHInput * 118 * 6 * 23);
-		// },
-		// monthlyMin: function() {
-		// 	return Math.ceil(this.sliderMin * 118);
-		// },
-		// monthlyMax: function() {
-		// 	return Math.ceil(this.sliderMax * 118);
-		// },
+		eurPh: function() {
+			return this.happySlideValue.toFixed(2);
+		},
+		eurPM: function() {
+			return Math.ceil(this.values.workHPercent * this.happySlideValue * this.values.workHoursPMonth).toString();
+		},
+		rsdPh: function() {
+			return Math.ceil(this.happySlideValue * this.values.rsdPEur).toString();
+		},
+		rsdPM: function() {
+			return Math.ceil(this.values.workHPercent * this.rsdPh * this.values.workHoursPMonth).toString();
+		},
 		happySliderColor: function() {
-			if (this.happySlideValue < 4) {
-				return "#e60000"; // red
-			} else if (this.happySlideValue < 5) {
-				return "#e68a00"; // amber
-			} else if (this.happySlideValue < 7) {
-				return "#ffe100"; // yellow
-			} else if (this.happySlideValue < 10) {
-				return this.colors.levelHappy; // green
+			if (this.happySlideValue < this.values.tresholdSad) {
+				return this.colors.levelVerySad; // red - very sad
+			} else if (this.happySlideValue < this.values.tresholdOkay) {
+				return this.colors.levelSad; // amber - sad
+			} else if (this.happySlideValue < this.values.tresholdVeryHappy) {
+				return this.colors.levelOkay; // yellow - okay
+			} else if (this.happySlideValue < this.values.tresholdExtatic) {
+				return this.colors.levelVeryHappy; // green - very happy
 			} else {
-				return "#0099ff" // blue
+				return this.colors.levelExtatic // blue - extatic
 			}
 		}
 	}

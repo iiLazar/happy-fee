@@ -39,8 +39,13 @@
 				/>
 			</div>
 
-			<div id="happyDescriptionContainer">
-				slide {{ happySlideValue }}
+			<div id="happyResultContainer">
+				<HappyResult
+					:fee=eurPh
+					:color=happySliderColor
+					:smiley=text[currentLevel].smiley
+					:title=text[currentLevel].title
+				/>
 			</div>
 		</div>
 	</div>
@@ -48,17 +53,22 @@
 
 <script>
 
+import { text } from "../data/text";
+
 import slider from "vue3-slider";
 import SalaryAmountDisplay from "../components/SalaryAmountDisplay.vue"
+import HappyResult from "../components/HappyResult.vue"
 
 export default {
 	name: 'Home',
 	components: {
 		"VueSlider": slider,
 		"SalaryAmountDisplay" : SalaryAmountDisplay,
+		"HappyResult" : HappyResult,
 	},
 	data() {
 		return {
+			text: text,
 			happySlideValue: this.values.tresholdOkay,
 			// Need these slider values to be numbers to avoid type warnings (expected nubmer 2 got string "2")
 			happySliderMin: 2.90,
@@ -73,6 +83,7 @@ export default {
 			},
 		}
 	},
+	// TODO remove
 	methods: {
 		// updateHappySlideValue() {
 		// 	this.happySlideValue = this.eurPHInput;
@@ -92,6 +103,7 @@ export default {
 		rsdPM: function() {
 			return Math.ceil(this.values.workHPercent * this.rsdPh * this.values.workHoursPMonth).toString();
 		},
+		// TODO refactor using currentLevel
 		happySliderColor: function() {
 			if (this.happySlideValue < this.values.tresholdSad) {
 				return this.colors.levelVerySad; // red - very sad
@@ -103,6 +115,19 @@ export default {
 				return this.colors.levelVeryHappy; // green - very happy
 			} else {
 				return this.colors.levelExtatic // blue - extatic
+			}
+		},
+		currentLevel: function() {
+			if (this.happySlideValue < this.values.tresholdSad) {
+				return this.values.currentLevel[0]; // very sad
+			} else if (this.happySlideValue < this.values.tresholdOkay) {
+				return this.values.currentLevel[1]; // sad
+			} else if (this.happySlideValue < this.values.tresholdVeryHappy) {
+				return this.values.currentLevel[2]; // okay
+			} else if (this.happySlideValue < this.values.tresholdExtatic) {
+				return this.values.currentLevel[3]; // very happy
+			} else {
+				return this.values.currentLevel[4] // extatic
 			}
 		}
 	}
@@ -145,7 +170,8 @@ export default {
 #happySliderContainer {
 	padding: 5vh 5vw 5vh 5vw;
 }
-#happyDescriptionContainer {
-	padding: 3rem;
+#happyResultContainer {
+	flex-grow: 1;
+	padding: 2rem 2rem 2rem 0rem;
 }
 </style>

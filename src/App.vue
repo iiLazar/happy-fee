@@ -56,6 +56,9 @@ export default {
 .round-S {
 	border-radius: 15px;
 }
+.round-M {
+	border-radius: 30px;
+}
 
 /* TODO remove */
 /* Colors are set using values from settings.js => in template */

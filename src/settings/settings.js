@@ -12,6 +12,8 @@ let values = {
     tresholdVeryHappy: 6,   // okay 5 - 6 (Milan 1y infl 1.25 adjusted: 4.93 - 5.34)
     tresholdExtatic: 8,     // happy 6 - 8
                             // extatic > 8
+
+    currentLevel: ["verySad", "sad", "okay", "veryHappy", "extatic"],
 };
 
 let colors = {

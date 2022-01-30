@@ -2,7 +2,7 @@
 	<div :style="mainContainerStyle" class="mainContainer horizCont round-S">
 		<div :style="{backgroundColor: colors.primary}" class="leftC vertCont round-S">
 			<div class="aboveSlider horizCont">
-				<SalaryAmountDisplay title="RSD/Month" :amount=rsdPM />
+				<SalaryAmountDisplay title="€/h" :amount=eurPh />
 				<SalaryAmountDisplay title="€/Month" :amount=eurPM />
 			</div>
 			<div class="inputSliderCont">
@@ -21,7 +21,7 @@
 			</div>
 			<div class="belowSlider horizCont">
 				<SalaryAmountDisplay title="RSD/h" :amount=rsdPh />
-				<SalaryAmountDisplay title="€/h" :amount=eurPh />
+				<SalaryAmountDisplay title="RSD/Month" :amount=rsdPM />
 			</div>
 		</div>
 		<div :style="{backgroundColor: colors.primary}" class="rightC horizCont round-S">
@@ -69,10 +69,10 @@ export default {
 	data() {
 		return {
 			text: text,
-			happySlideValue: this.values.tresholdOkay,
+			happySlideValue: this.values.tresholdOkay(),
 			// Need these slider values to be numbers to avoid type warnings (expected nubmer 2 got string "2")
 			happySliderMin: 2.90,
-			happySliderMax: 9.99,
+			happySliderMax: 8.88,
 			happySliderStep: 0.01,
 			happySliderWidth: "100%",
 			happySliderHeight: 70,
@@ -107,9 +107,9 @@ export default {
 		happySliderColor: function() {
 			if (this.happySlideValue < this.values.tresholdSad) {
 				return this.colors.levelVerySad; // red - very sad
-			} else if (this.happySlideValue < this.values.tresholdOkay) {
+			} else if (this.happySlideValue < this.values.tresholdOkay()) {
 				return this.colors.levelSad; // amber - sad
-			} else if (this.happySlideValue < this.values.tresholdVeryHappy) {
+			} else if (this.happySlideValue < this.values.tresholdVeryHappy()) {
 				return this.colors.levelOkay; // yellow - okay
 			} else if (this.happySlideValue < this.values.tresholdExtatic) {
 				return this.colors.levelVeryHappy; // green - very happy
@@ -120,9 +120,9 @@ export default {
 		currentLevel: function() {
 			if (this.happySlideValue < this.values.tresholdSad) {
 				return this.values.currentLevel[0]; // very sad
-			} else if (this.happySlideValue < this.values.tresholdOkay) {
+			} else if (this.happySlideValue < this.values.tresholdOkay()) {
 				return this.values.currentLevel[1]; // sad
-			} else if (this.happySlideValue < this.values.tresholdVeryHappy) {
+			} else if (this.happySlideValue < this.values.tresholdVeryHappy()) {
 				return this.values.currentLevel[2]; // okay
 			} else if (this.happySlideValue < this.values.tresholdExtatic) {
 				return this.values.currentLevel[3]; // very happy

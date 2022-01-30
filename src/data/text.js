@@ -13,12 +13,12 @@ export const text = {
         text: ""
     },
     okay: {
-        smiley: "😐",
+        smiley: "🙂",
         title: "Okay",
         text: ""
     },
     veryHappy: {
-        smiley: "🙂",
+        smiley: "😀",
         title: "Happy",
         text: ""
     },

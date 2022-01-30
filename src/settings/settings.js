@@ -1,19 +1,71 @@
 let values = {
     rsdPEur: 117.61,   // 2022 01 21
     /*  average work hours per month
-        2022 average 173.33 https://www.paragraf.rs/statistika/minimalna_zarada.html
+        2022 average 173.33 src https://www.paragraf.rs/statistika/minimalna_zarada.html
         bckp 174 2021 https://www.chr.ucla.edu/news/monthly-working-hours-calendar
      */
-    workHoursPMonth: 173,
+    workHoursPMonth: 173.33,
+    workHoursPMonthSrc: "https://www.paragraf.rs/statistika/minimalna_zarada.html",
     workHPercent: 0.75,
-    // happyness levels
-    tresholdSad: 4,         // very Sad < 4
-    tresholdOkay: 5,        // sad 4 - 5
-    tresholdVeryHappy: 6,   // okay 5 - 6 (Milan 1y infl 1.25 adjusted: 4.93 - 5.34)
-    tresholdExtatic: 8,     // happy 6 - 8
-                            // extatic > 8
+    
+    // Reference values
+    /* RS Junior Average 2021 736E
+        src1 https://www.helloworld.rs/blog/Programeri-u-Srbiji-zaradjuju-u-proseku-1225-evra/11299
+        src2 https://www.danas.rs/zivot/tehnologije/programeri-u-srbiji-zaradjuju-u-proseku-1-225-evra/
+        https://www.b92.net/biz/vesti/srbija/koliko-zaista-zaraduju-programeri-u-srbiji-subotica-dvostruko-jeftinija-od-beograda-1823936?version=amp
+     */
+    rsJrAverage2020: 736,
+    rsJrAverage2020Src1: "https://www.helloworld.rs/blog/Programeri-u-Srbiji-zaradjuju-u-proseku-1225-evra/11299",
+    rsJrAverage2020Src2: "https://www.danas.rs/zivot/tehnologije/programeri-u-srbiji-zaradjuju-u-proseku-1-225-evra/",
+    rsJrAverageWorkHPercentAndInflationAdjusted: function() {
+        return this.rsJrAverage2020 * this.workHPercent * this.inflation.year2021;
+    },
+    milanFrom: 4,   // gross 6
+    milanTo: 4.5,   // gross 7
+    adjustedFrom: () => this.milanFrom * this.inflation.calculateCumulativeSince2014,
+
+    /* happyness levels 2022
+        very sad         < 4.25
+        sad         4.25 - 4.93 (--> 4.58 non-engineer + average adjusted)
+        okay        4.93 - 5.55 (--> 4.58 Milan 1yr inflation (+ non-eng + avrg) adjusted)
+        happy       5.55 - 7
+        extatic          > 7
+     */
+    tresholdSad: 4.25,              // very sad
+    tresholdOkay: function() {      // sad
+        // return this.milanFrom * this.inflation.calculateCumulativeSince2014();
+        // Decrease to acount for not being an engineer + avrg
+        return 4.58;
+    },
+    tresholdVeryHappy: function() {     // okay
+        return this.milanTo * this.inflation.calculateCumulativeSince2014();
+    },
+    tresholdExtatic: 7,     // happy
 
     currentLevel: ["verySad", "sad", "okay", "veryHappy", "extatic"],
+    
+    inflation: {
+        src1: "https://www.stat.gov.rs/oblasti/cene/potrosacke-cene/",
+        src2: "https://arhiva.mtt.gov.rs/informacije/potrosacka-korpa/",
+        calculateCumulativeSince2014: function () {
+            let result = 1;
+            for (let i = new Date().getFullYear(); i > 2013; i--) {
+                let currentRate = this[`year${i}`];
+                if (currentRate) {
+                    result *= currentRate;
+                }
+            }
+            return result;
+        },
+        year2014: 1.023,    // https://arhiva.mtt.gov.rs/download/KUPOVNA%20MOC%20-%20DECEMBAR%202014.pdf
+        year2015: 1.016,    // https://arhiva.mtt.gov.rs/download/potrosacka-korpa/Korpa%20Decembar%202015.pdf
+        year2016: 1.014,    // https://arhiva.mtt.gov.rs/download/potrosacka-korpa/KUPOVNA%20MOC-DECEMBAR%202016.pdf
+        year2017: 1.024,    // https://arhiva.mtt.gov.rs/download/KUPOVNA%20MO%C4%86DECEMBAR%202017.pdf
+        year2018: 1.010,    // https://arhiva.mtt.gov.rs/download/kupovna.pdf
+        year2019: 1.0197,   // https://arhiva.mtt.gov.rs/download/KUPOVNA%20MOC%20-%20decembar%202019.pdf
+        year2020: 1.028,    // https://arhiva.mtt.gov.rs/download/KUPOVNA%20MOC%20-dec%202020.docx
+        year2021: 1.079,    // https://www.stat.gov.rs/vesti/statisticalrelease/?p=8542&a=03&s=0301?s=0301
+    }
 };
 
 let colors = {

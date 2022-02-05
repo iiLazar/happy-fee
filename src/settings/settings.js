@@ -23,6 +23,7 @@ let values = {
     milanFrom: 4,   // gross 6
     milanTo: 4.5,   // gross 7
     adjustedFrom: () => this.milanFrom * this.inflation.calculateCumulativeSince2014,
+    milanAdjustedString: "4.93 - 5.55€/h",
 
     /* happyness levels 2022
         very sad         < 4.25

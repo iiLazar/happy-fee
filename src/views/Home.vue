@@ -6,8 +6,8 @@
 				<SalaryAmountDisplay title="€/Month" :amount=eurPM />
 			</div>
 			<div class="inputSliderCont">
-				Use slider to
-				<br> set fee value:
+				▶ Use slider
+				<br> to set fee value:
 				<VueSlider class="inputSlider"
 					v-model="happySlideValue"
 					:color=colors.levelVeryHappy
@@ -45,6 +45,7 @@
 					:color=happySliderColor
 					:smiley=text[currentLevel].smiley
 					:title=text[currentLevel].title
+					:note=text[currentLevel].note
 				/>
 			</div>
 		</div>
@@ -136,8 +137,8 @@ export default {
 
 <style scoped>
 .mainContainer {
-	width: 80vw;
-	height: 80vh;
+	width: 90vw;
+	height: 85vh;
 	padding: 1.5%;
 }
 

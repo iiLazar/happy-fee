@@ -140,6 +140,7 @@ export default {
 	width: 90vw;
 	height: 85vh;
 	padding: 1.5%;
+	margin-top: 3rem;
 }
 
 .leftC {

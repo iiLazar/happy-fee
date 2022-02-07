@@ -24,7 +24,7 @@ export const text = {
     veryHappy: {
         smiley: "😀",
         title: "Happy",
-        note: "Ovo je trenutno izvan mojih očekivanja. 😉"
+        note: "Ovo je trenutno iznad mojih očekivanja. 😉"
     },
     extatic: {
         smiley: "🤩",

@@ -1,9 +1,8 @@
 <template>
 	<div :style="backgroundContainerStyle" class="backgroundContainer vertCont">
 		<div id="nav">
-			<router-link to="/">Home</router-link> |
-			<router-link to="/about">About</router-link> |
-			<router-link to="/old">Old Home</router-link>
+			<NavButton title="Dashboard" link="/" />
+			<NavButton title="Methodology" link="/methodology" />
 		</div>
 
 		<router-view/>
@@ -13,10 +12,23 @@
 
 <script>
 
+import NavButton from "./components/NavButton.vue";
+
 export default {
 	name: 'App',
+	components: {
+		"NavButton": NavButton,
+	},
 	data() {
 		return {
+			// TODO refactor: bind colors in all component style's?
+			primary: this.colors.primary,
+			secondary: this.colors.secondary,
+			tertiary: this.colors.tertiary,
+			medium: this.colors.medium,
+			light: this.colors.light,
+			greyLight: this.colors.greyLight,
+			rootStyle: "{background-color: red;}",
 			// only styling using setting.js; rest is in <style>
 			backgroundContainerStyle: {
 				backgroundColor: this.colors.primary,
@@ -36,8 +48,7 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	/* TODO change global text color */
-	color: #acae50;
+	color: v-bind("greyLight");
 }
 
 .vertCont {
@@ -66,17 +77,11 @@ export default {
 	padding-bottom: 0.5rem;
 }
 
-/* TODO remove */
 #nav {
-	padding: 30px;
+	position: absolute;
+	top: 1.1rem;
+	right: 5.8rem;
+	padding: 1rem;
 }
 
-#nav a {
-	font-weight: bold;
-	color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-	color: #42b983;
-}
 </style>

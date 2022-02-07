@@ -8,6 +8,7 @@ export const colorMixin = {
 			tertiary: colors.tertiary,
 			medium: colors.medium,
 			light: colors.light,
+			lighter: colors.lighter,
 			greyLight: colors.greyLight,
         }
     },

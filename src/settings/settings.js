@@ -75,6 +75,7 @@ let colors = {
     tertiary: "#003cb3",    // 35%
     medium: "#4d88ff",      // 60%
     light: "#80aaff",       // 75%
+    lighter: "#b3ccff",     // 85%
     greyLight: "#eeeeee",
     inputSlider: "00e600",
 

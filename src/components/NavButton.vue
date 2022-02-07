@@ -28,8 +28,6 @@ export default {
 <style scoped>
 
 a {
-    z-index: 1;
-    box-sizing: content-box;
     font-weight: bold;
 	text-decoration: none;
 	padding: 0.8rem;
@@ -37,12 +35,13 @@ a {
 
     border: 6px solid v-bind("secondary");
 	color: v-bind("light");
+	color: v-bind("lightGrey");
 
 }
 a:hover {
     background-color: v-bind("secondary");
     border-color: v-bind("tertiary");
-	color: v-bind("light");
+	color: v-bind("lighter");
 	font-weight: bold;
 	text-decoration: none;
 }
@@ -50,6 +49,7 @@ a:hover {
 a.router-link-exact-active {
 	background-color: v-bind("secondary");
     border: 6px solid v-bind("tertiary");
-	color: v-bind("lightGrey");
+	color: v-bind("lighter");
+	/* color: v-bind("lightGrey"); */
 }
 </style>

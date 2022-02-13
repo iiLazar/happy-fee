@@ -73,11 +73,11 @@ export default {
 }
 .topPart {
     width: 100%;
-    height: 50%;
+    height: 45%;
 }
 .bottomPart {
     justify-content: space-between;
-    height: 50%;
+    height: 55%;
 }
 
 .valueContainer {
@@ -99,11 +99,11 @@ export default {
 }
 
 .currentNote {
-    height: 55%;
+    height: 68%;
     margin-top: 2rem;
 }
 .commonNoteContainer {
-    height: 45%;
+    height: 32%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

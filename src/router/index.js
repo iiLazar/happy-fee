@@ -12,11 +12,6 @@ const routes = [
     name: 'Methodology',
     component: () => import('../views/Methodology.vue')
   },
-  {
-    path: '/old',
-    name: 'OldHome',
-    component: () => import('../views/OldHome.vue')
-  },
 ]
 
 const router = createRouter({

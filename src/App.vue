@@ -27,6 +27,7 @@ export default {
 			tertiary: this.colors.tertiary,
 			medium: this.colors.medium,
 			light: this.colors.light,
+			lighter: this.colors.lighter,
 			greyLight: this.colors.greyLight,
 			rootStyle: "{background-color: red;}",
 			// only styling using setting.js; rest is in <style>
@@ -82,6 +83,14 @@ export default {
 	top: 1.1rem;
 	right: 5.8rem;
 	padding: 1rem;
+}
+
+a {
+	color: v-bind(lighter);
+	text-decoration: none;
+}
+a:hover {
+	color: v-bind(light);
 }
 
 </style>

@@ -17,13 +17,26 @@ let values = {
     rsJrAverage2020: 736,
     rsJrAverage2020Src1: "https://www.helloworld.rs/blog/Programeri-u-Srbiji-zaradjuju-u-proseku-1225-evra/11299",
     rsJrAverage2020Src2: "https://www.danas.rs/zivot/tehnologije/programeri-u-srbiji-zaradjuju-u-proseku-1-225-evra/",
+    rsJrAverageInflationAdjusted: function() {
+        return this.rsJrAverage2020 * this.inflation.year2021;
+    },
+    rsJrAveragePerHourInflationAdjusted: function() {
+        return this.rsJrAverageInflationAdjusted() / this.workHoursPMonth;
+    },
     rsJrAverageWorkHPercentAndInflationAdjusted: function() {
-        return this.rsJrAverage2020 * this.workHPercent * this.inflation.year2021;
+        return this.rsJrAverageInflationAdjusted() * this.workHPercent;
     },
     milanFrom: 4,   // gross 6
     milanTo: 4.5,   // gross 7
-    adjustedFrom: () => this.milanFrom * this.inflation.calculateCumulativeSince2014,
-    milanAdjustedString: "4.93 - 5.55€/h",
+    milanAdjustedFrom: function() {
+        return this.milanFrom * this.inflation.calculateCumulativeSince2014();
+    },
+    milanAdjustedTo: function() {
+        return this.milanTo * this.inflation.calculateCumulativeSince2014();
+    },
+    milanAdjustedString: function() {
+        return `${this.milanAdjustedFrom().toFixed(2)} - ${this.milanAdjustedTo().toFixed(2)}€/h`;
+    },
 
     /* happyness levels 2022
         very sad         < 4.25
@@ -46,8 +59,8 @@ let values = {
     currentLevel: ["verySad", "sad", "okay", "veryHappy", "extatic"],
     
     inflation: {
-        src1: "https://www.stat.gov.rs/oblasti/cene/potrosacke-cene/",
-        src2: "https://arhiva.mtt.gov.rs/informacije/potrosacka-korpa/",
+        srcStat: "https://www.stat.gov.rs/vesti/statisticalrelease/?p=8542&a=03&s=0301?s=0301",
+        srcMtt: "https://arhiva.mtt.gov.rs/informacije/potrosacka-korpa/",
         calculateCumulativeSince2014: function () {
             let result = 1;
             for (let i = new Date().getFullYear(); i > 2013; i--) {
@@ -66,6 +79,20 @@ let values = {
         year2019: 1.0197,   // https://arhiva.mtt.gov.rs/download/KUPOVNA%20MOC%20-%20decembar%202019.pdf
         year2020: 1.028,    // https://arhiva.mtt.gov.rs/download/KUPOVNA%20MOC%20-dec%202020.docx
         year2021: 1.079,    // https://www.stat.gov.rs/vesti/statisticalrelease/?p=8542&a=03&s=0301?s=0301
+
+        // This is horrible xD
+        table: function() {
+            let table = `<table><tr><th>Godina</th><th>% povećanja</th>`;
+            for (let year = 2014; year < 2022; year++) {
+                let currentRate = (this[`year${year}`] * 100 - 100).toFixed(2);
+                table += `
+                    <tr>
+                        <td width="130px">${year}</td><td align="right">${currentRate}</td>
+                    </tr>
+                `;
+            }
+            return table + "</table>";
+        },
     }
 };
 

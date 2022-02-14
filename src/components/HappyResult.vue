@@ -21,7 +21,10 @@
                     <div class="netNote bold font-L" v-html="text.netNote" />
                 </li>
                 <li>
-                    <div class="monthNote bold font-S" v-html="text.monthNote" />
+                    <div class="monthNote bold font-S">
+                        <!-- I know this is horrible... 😭 -->
+                        <span v-html="text.monthNote" /> <router-link to='/methodology'>Metodologija</router-link>)
+                    </div>
                 </li>
             </ul>
         </div>

@@ -22,6 +22,11 @@
 				<h3 class="chapterTitle">{{ chapter.title }}</h3>
 				<div class="chapterContent" v-html="chapter.content"></div>
 			</template>
+
+			<div class="toDash">
+				<b>&lt;</b>	Nazad na
+				<router-link to='/'>Dashboard</router-link>
+			</div>
 		</div>
 	</div>
 </template>
@@ -93,7 +98,7 @@ export default {
 	padding-left: 50px;
 }
 
-.chapterTitle {
+.chapterTitle, .toDash {
 	font-size: 1.9rem;
 	margin-top: 80px;
 }

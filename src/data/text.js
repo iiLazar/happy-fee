@@ -2,7 +2,8 @@ import { values } from '../settings/settings';
 
 export const text = {
     netNote: "Sve izražene vrednosti su <b>neto</b>.",
-    monthNote: `Mesečne vrednosti su izražene za <b>${values.workHPercent * 100}%</b> radnog vremena (više u odeljku "Metodologija")`,
+    // TODO I know this is horrible... 😭
+    monthNote: `Mesečne vrednosti su izražene za <b>${values.workHPercent * 100}%</b> radnog vremena (više u odeljku`,
     verySad: {
         smiley: "😞",
         title: "Very Sad",
@@ -101,7 +102,7 @@ export const text = {
                     <br>
                     Prilagođeno za inflaciju:
                     <br>
-                    <b>${values.rsJrAverageInflationAdjusted().toFixed(2)}€</b> mesečno (<b>${values.rsJrAverageWorkHPercentAndInflationAdjusted().toFixed(2)}€</b> tj. <b>${values.rsJrAverageWorkHPercentAndInflationAdjustedRSD().toFixed(0)}RSD</b> za 75% radnog vremena), odnosno
+                    <b>${values.rsJrAverageInflationAdjusted().toFixed(2)}€</b> mesečno (<b>${values.rsJrAverageWorkHPercentAndInflationAdjusted().toFixed(2)}€</b> tj. <b>${values.rsJrAverageWorkHPercentAndInflationAdjustedRSD().toFixed(0)}RSD</b> za ${(values.workHPercent * 100)}% radnog vremena), odnosno
                     <br>
                     <b>${values.rsJrAveragePerHourInflationAdjusted().toFixed(2)}€/h</b>.
                 `,

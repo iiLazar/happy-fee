@@ -10,13 +10,14 @@ let values = {
     
     // Reference values
     /* RS Junior Average 2021 736E
-        src1 https://www.helloworld.rs/blog/Programeri-u-Srbiji-zaradjuju-u-proseku-1225-evra/11299
-        src2 https://www.danas.rs/zivot/tehnologije/programeri-u-srbiji-zaradjuju-u-proseku-1-225-evra/
+        https://www.helloworld.rs/blog/Programeri-u-Srbiji-zaradjuju-u-proseku-1225-evra/11299
+        https://www.danas.rs/zivot/tehnologije/programeri-u-srbiji-zaradjuju-u-proseku-1-225-evra/
         https://www.b92.net/biz/vesti/srbija/koliko-zaista-zaraduju-programeri-u-srbiji-subotica-dvostruko-jeftinija-od-beograda-1823936?version=amp
      */
     rsJrAverage2020: 736,
-    rsJrAverage2020Src1: "https://www.helloworld.rs/blog/Programeri-u-Srbiji-zaradjuju-u-proseku-1225-evra/11299",
-    rsJrAverage2020Src2: "https://www.danas.rs/zivot/tehnologije/programeri-u-srbiji-zaradjuju-u-proseku-1-225-evra/",
+    rsJrAverage2020SrcHelloW: "https://www.helloworld.rs/blog/Programeri-u-Srbiji-zaradjuju-u-proseku-1225-evra/11299",
+    rsJrAverage2020SrcDanas: "https://www.danas.rs/zivot/tehnologije/programeri-u-srbiji-zaradjuju-u-proseku-1-225-evra/",
+    rsJrAverage2020SrcB92: "https://www.b92.net/biz/vesti/srbija/koliko-zaista-zaraduju-programeri-u-srbiji-subotica-dvostruko-jeftinija-od-beograda-1823936?version=amp",
     rsJrAverageInflationAdjusted: function() {
         return this.rsJrAverage2020 * this.inflation.year2021;
     },
@@ -26,6 +27,10 @@ let values = {
     rsJrAverageWorkHPercentAndInflationAdjusted: function() {
         return this.rsJrAverageInflationAdjusted() * this.workHPercent;
     },
+    rsJrAverageWorkHPercentAndInflationAdjustedRSD: function() {
+        return this.rsJrAverageWorkHPercentAndInflationAdjusted() * this.rsdPEur;
+    },
+
     milanFrom: 4,   // gross 6
     milanTo: 4.5,   // gross 7
     milanAdjustedFrom: function() {
@@ -82,15 +87,21 @@ let values = {
 
         // This is horrible xD
         table: function() {
-            let table = `<table><tr><th>Godina</th><th>% povećanja</th>`;
+            let table = `<table><tr><th>Godina</th><th align="right">%</th>`;
             for (let year = 2014; year < 2022; year++) {
                 let currentRate = (this[`year${year}`] * 100 - 100).toFixed(2);
                 table += `
                     <tr>
-                        <td width="130px">${year}</td><td align="right">${currentRate}</td>
+                        <td width="130px">${year}.</td><td align="right">${currentRate}</td>
                     </tr>
                 `;
             }
+            table += `
+                <tr>
+                    <td width="180px">Kumulativno</td>
+                    <td align="right">${(this.calculateCumulativeSince2014() * 100 - 100).toFixed(2)}</td>
+                </tr>
+            `;
             return table + "</table>";
         },
     }

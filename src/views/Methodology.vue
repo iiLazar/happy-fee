@@ -3,7 +3,6 @@
 		<h1 class="title">Metodologija</h1>
 		<div class="pageContent">
 
-
 			<div v-html="methodology.foreword"></div>
 
 			<!-- Basic Values -->
@@ -11,7 +10,7 @@
 			<table>
 				<tr v-for="item in methodology.basics">
 					<td>{{ item.title }}:</td>
-					<td class="tdPad">{{ item.value() }}</td>
+					<td class="tdPad"><b>{{ item.value() }}</b></td>
 					<td v-if="item.src" class="tdPad">
 						<a :href=item.src target="_blank" rel="noopener">[izvor]</a>
 					</td>
@@ -48,7 +47,7 @@ export default {
 .pageContainer {
 	width: 60%;
 	min-width: 600px;
-	height: 90%;
+	height: 92%;
 	margin-top: 4.5rem;
 }
 .title {
@@ -61,7 +60,7 @@ export default {
 	height: 85%;
 	font-size: 1.5rem;
 	text-align: left;
-	padding: 0px 20px;
+	padding: 20px;
 
 	overflow: auto;
 	overflow-x: hidden;

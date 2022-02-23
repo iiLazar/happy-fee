@@ -26,7 +26,7 @@ export const text = {
     },
     extatic: {
         smiley: "🤩",
-        title: "Extatic",
+        title: "Ecstatic",
         note: "Nadrealno 😂<br>Ali morao sam da se zabavim sa sliderom 😂"
     },
 

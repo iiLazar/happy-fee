@@ -2,7 +2,7 @@
 	<div :style="backgroundContainerStyle" class="backgroundContainer vertCont">
 		<div id="nav">
 			<NavButton title="Dashboard" link="/" />
-			<NavButton title="Methodology" link="/methodology" />
+			<NavButton title="Metodologija" link="/methodology" />
 		</div>
 
 		<router-view/>

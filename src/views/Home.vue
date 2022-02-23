@@ -76,7 +76,7 @@ export default {
 			happySliderMax: 8.88,
 			happySliderStep: 0.01,
 			happySliderWidth: "100%",
-			happySliderHeight: 70,
+			happySliderHeight: 80,
 			inputSliderHeight: 20,
 
 			mainContainerStyle: {
